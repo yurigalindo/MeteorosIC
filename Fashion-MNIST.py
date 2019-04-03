@@ -69,22 +69,22 @@ train_labels = extract_labels(train_labels_filename, 60000)
 test_data = extract_data(test_data_filename, 10000)
 test_labels = extract_labels(test_labels_filename, 10000)
 
-if not os.path.isdir("Data/Fashion-MNIST/train-images"):
-   os.makedirs("Data/Fashion-MNIST/train-images")
+if not os.path.isdir("Fashion-MNIST/train-images"):
+   os.makedirs("Fashion-MNIST/train-images")
 
-if not os.path.isdir("Data/Fashion-MNIST/test-images"):
-   os.makedirs("Data/Fashion-MNIST/test-images")
+if not os.path.isdir("Fashion-MNIST/test-images"):
+   os.makedirs("Fashion-MNIST/test-images")
 
 # process train data
-with open("Data/Fashion-MNIST/train-labels.csv", 'w', newline='') as csvFile:
+with open("Fashion-MNIST/train-labels.csv", 'w', newline='') as csvFile:
   writer = csv.writer(csvFile, delimiter=',', quotechar='"')
   for i in range(len(train_data)):
-    imsave("Data/Fashion-MNIST/train-images/" + str(i) + ".jpg", train_data[i][:,:,0])
+    imsave("Fashion-MNIST/train-images/" + str(i) + ".jpg", train_data[i][:,:,0])
     writer.writerow(["train-images/" + str(i) + ".jpg", train_labels[i]])
 
 # repeat for test data
-with open("Data/Fashion-MNIST/test-labels.csv", 'w', newline='') as csvFile:
+with open("Fashion-MNIST/test-labels.csv", 'w', newline='') as csvFile:
   writer = csv.writer(csvFile, delimiter=',', quotechar='"')
   for i in range(len(test_data)):
-    imsave("Data/Fashion-MNIST/test-images/" + str(i) + ".jpg", test_data[i][:,:,0])
+    imsave("Fashion-MNIST/test-images/" + str(i) + ".jpg", test_data[i][:,:,0])
     writer.writerow(["test-images/" + str(i) + ".jpg", test_labels[i]])

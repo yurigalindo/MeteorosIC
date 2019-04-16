@@ -49,7 +49,7 @@ class Learner:
         train_dataloader=torch.utils.data.DataLoader(self.training_dataset,batch_size=training_batchsize,shuffle=True)
         valid_dataloader=torch.utils.data.DataLoader(self.validation_dataset,batch_size=validation_batchsize,shuffle=True)
         training_batches=len(self.training_dataset)/training_batchsize
-        validation_batches=len(self.validation_datset)validation_batchsize
+        validation_batches=len(self.validation_dataset)/validation_batchsize
         since = time.time()
         for epoch in range(num_epochs):
             print("Epoch {} of {}".format(epoch,num_epochs))

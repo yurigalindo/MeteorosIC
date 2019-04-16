@@ -9,8 +9,9 @@ import time
 
 class Learner:
 
-    def __init__(self,model):
+    def __init__(self,model,criterion):
         self.model=model
+        self.criterion=criterion
         self.device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     def add_datasets(self,training,valid):
@@ -24,24 +25,24 @@ class Learner:
         self.optimizer.zero_grad()
         with torch.set_grad_enabled(True):
             outputs=self.model(inputs)
-            del inputs
-            loss = criterion(outputs, labels)
+            loss = self.criterion(outputs, labels)
             loss.backward()
             self.optimizer.step()
-        _, preds = torch.max(outputs, 1)
+        _,preds = torch.max(outputs, 1)
         corrects = torch.sum(preds==labels.data).item()
         return loss.item(),corrects
 
     def eval_batch(self, inputs, labels):
         with torch.no_grad():
             outputs=self.model(inputs)
-            del inputs
-            loss = criterion(outputs, labels)
-        _, preds = torch.max(outputs, 1)
+            loss = self.criterion(outputs, labels)
+            _,preds = torch.max(outputs, 1)
         corrects = torch.sum(preds==labels.data).item()
         return loss.item(),corrects
+
     def print_statistics(self,loss,accuracy):
         print("Total Loss={}\nAccuracy={}".format(loss,accuracy))
+
     def train(self,num_epochs,training_batchsize,validation_batchsize):
         """Train the learner's model for num_epochs on training batchsize, printing the train and validation loss and accuracy
         """

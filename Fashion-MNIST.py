@@ -10,7 +10,7 @@ import time
 
 from six.moves import urllib
 from six.moves import xrange  # pylint: disable=redefined-builtin
-from scipy.misc import imsave
+from scipy.misc.pilutil import imsave
 import tensorflow as tf
 import numpy as np
 import csv
